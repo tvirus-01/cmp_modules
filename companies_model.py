@@ -55,9 +55,17 @@ class getCompaniesInfo():
                     company_name = title.text
 
                     pub_date = content.find("dl", {"class":"publication-date"})
-                    notice_date = pub_date.find("time").text
+                    notice_date = pub_date.find("time")
+                    if notice_date == None:
+                        notice_date = ''
+                    else:
+                        notice_date = notice_date.text
 
-                    nttype = content.find("dl", {"class":"notice-type"}).find("dd").text
+                    nttype = content.find("dl", {"class":"notice-type"}).find("dd")
+                    if nttype == None:
+                        nttype = ''
+                    else:
+                        nttype = nttype.text
 
                     link = title.find("a")['href']
 
@@ -89,7 +97,11 @@ class getCompaniesInfo():
                         CourtNumber = ''
                     else:
                         CourtNumber = CourtNumber.text    
-                    companyNumber = companySoup.find("span", {"data-gazettes":"CompanyNumber"}).text
+                    companyNumber = companySoup.find("span", {"data-gazettes":"CompanyNumber"})
+                    if companyNumber == None:
+                        companyNumber = ''
+                    else:
+                        companyNumber = companyNumber.text
 
                     compList = (companyNumber, str(company_name), str(areacode), str(Administrator), str(CourtNumber), str(DateOfAppointment), notice_id, str(nttype), str(notice_date))
 
@@ -107,9 +119,17 @@ class getCompaniesInfo():
                         company_name = title.text
 
                         pub_date = content.find("dl", {"class":"publication-date"})
-                        notice_date = pub_date.find("time").text
+                        notice_date = pub_date.find("time")
+                        if notice_date == None:
+                            notice_date = ''
+                        else:
+                            notice_date = notice_date.text
 
-                        nttype = content.find("dl", {"class":"notice-type"}).find("dd").text
+                        nttype = content.find("dl", {"class":"notice-type"}).find("dd")
+                        if nttype == None:
+                            nttype = ''
+                        else:
+                            nttype = nttype.text
 
                         link = title.find("a")['href']   
 
@@ -141,7 +161,11 @@ class getCompaniesInfo():
                             CourtNumber = ''
                         else:
                             CourtNumber = CourtNumber.text    
-                        companyNumber = companySoup.find("span", {"data-gazettes":"CompanyNumber"}).text
+                        companyNumber = companySoup.find("span", {"data-gazettes":"CompanyNumber"})
+                        if companyNumber == None:
+                            companyNumber = ''
+                        else:
+                            companyNumber = companyNumber.text
 
                         compList = (companyNumber, str(company_name), str(areacode), str(Administrator), str(CourtNumber), str(DateOfAppointment), notice_id, str(nttype), str(notice_date))
 
