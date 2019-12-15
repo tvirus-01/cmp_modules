@@ -9,10 +9,10 @@ import os
 class getCompaniesInfo():
     def chkDuplicat(cname, nttype):
         mydb = mysql.connector.connect(
-            host="database-2.crigucvmj05t.eu-west-2.rds.amazonaws.com",
+            host="host",
             user="admin",
-            passwd="GPx90NKU4WlTTHB8PEb3",
-            database="insolvency"
+            passwd="pass",
+            database="db"
         )
         mdb = mydb
         mycursor = mdb.cursor()
@@ -26,7 +26,7 @@ class getCompaniesInfo():
 
     def scrapeTheGazette(areacode):
         headers = {"User-agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"}
-        url = "https://www.thegazette.co.uk/insolvency/notice?results-page-size=100&numberOfLocationSearches=1&location-distance-1=1&categorycode=G405010101+G405010102+G405010103+-2&service=insolvency&location-postcode-1="+areacode
+        url = "https://www.thegazette.co.uk/db/notice?results-page-size=100&numberOfLocationSearches=1&location-distance-1=1&categorycode=G405010101+G405010102+G405010103+-2&service=db&location-postcode-1="+areacode
         data = re.get(url,headers=headers)
         soup = bs4.BeautifulSoup(data.text, 'html.parser')
 
@@ -39,10 +39,10 @@ class getCompaniesInfo():
             ttlPage = int(ttlNum/100)
 
             mydb = mysql.connector.connect(
-                host="database-2.crigucvmj05t.eu-west-2.rds.amazonaws.com",
+                host="host",
                 user="admin",
-                passwd="GPx90NKU4WlTTHB8PEb3",
-                database="insolvency"
+                passwd="pass",
+                database="db"
             )
             mycursor = mydb.cursor()
 
@@ -197,10 +197,10 @@ class getCompaniesInfo():
             
     def runGetCompanies():
         mydb = mysql.connector.connect(
-            host="database-2.crigucvmj05t.eu-west-2.rds.amazonaws.com",
+            host="host",
             user="admin",
-            passwd="GPx90NKU4WlTTHB8PEb3",
-            database="insolvency"
+            passwd="pass",
+            database="db"
         )
         mdb = mydb
         mycursor = mdb.cursor()
@@ -215,7 +215,7 @@ class getAdminProposal:
     def uPloadFile(file):
         ACCESS_KEY_ID = 'AKIATSEAQZOYLVVZMUVN'
         ACCESS_SECRET_KEY = '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'
-        BUCKET_NAME = 'insolvency-admin-proposal-bucket'
+        BUCKET_NAME = 'db-admin-proposal-bucket'
         FILE_NAME = file
 
         data = open(FILE_NAME, 'rb')
@@ -243,10 +243,10 @@ class getAdminProposal:
 
     def insertToDB(number, name, link):
         mydb = mysql.connector.connect(
-            host="database-2.crigucvmj05t.eu-west-2.rds.amazonaws.com",
+            host="host",
             user="admin",
-            passwd="GPx90NKU4WlTTHB8PEb3",
-            database="insolvency"
+            passwd="pass",
+            database="db"
         )
         mycursor = mydb.cursor()
 
@@ -283,7 +283,7 @@ class getAdminProposal:
                         tr_ttl = tr.find('strong').text.replace("'", "")
 
                         file_name = 'cmp_'+company_number+'_'+tr_ttl+'.pdf'
-                        file_link = 'https://insolvency-admin-proposal-bucket.s3-us-west-2.amazonaws.com/'+file_name
+                        file_link = 'https://db-admin-proposal-bucket.s3-us-west-2.amazonaws.com/'+file_name
                         #print(file_link)
                         #print(file_name)
                         getAdminProposal.downLoadPDF(dl_link,file_name)
@@ -293,10 +293,10 @@ class getAdminProposal:
 
     def runGetProposal():
         mydb = mysql.connector.connect(
-            host="database-2.crigucvmj05t.eu-west-2.rds.amazonaws.com",
+            host="host",
             user="admin",
-            passwd="GPx90NKU4WlTTHB8PEb3",
-            database="insolvency"
+            passwd="pass",
+            database="db"
         )
         mdb = mydb
         mycursor = mdb.cursor()
